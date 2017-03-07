@@ -4,7 +4,7 @@
 # contains the full copyright notices and license terms.
 {
     'name': 'Common Logging',
-    'version': '6.0.0.0',
+    'version': '7.0.0.4',
     'author': 'Adiczion SARL',
     'license': 'AGPL-3',
     'category': 'Extra',
@@ -16,10 +16,10 @@
 Logging
 =======
 
-This module does nothing of its own. It provides other modules with a
+This module does nothing of its own. It provides other modules with a 
 centralization environment for logging.
 
-The list of logged events can be accessed via the menu
+The list of logged events can be accessed via the menu 
 'Configuration -> Logging'
     """,
     'data': [

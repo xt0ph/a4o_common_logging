@@ -6,54 +6,62 @@
 -->
 <openerp>
     <data>
+
       <menuitem id="menu_logging" name="Logging"
-            parent="base.menu_administration" sequence="2"
-            groups="base.group_extended"/>
-      <record model="ir.ui.view" id="logging_tree_view">
-          <field name="name">Logging (tree)</field>
-          <field name="model">logging</field>
-          <field name="type">tree</field>
-          <field name="arch" type="xml">
-              <tree string="Logging"
-                      colors="blue:level=='debug';#FF8000:level=='warning';#FF5500:level=='error';red:level=='fatal'">
-                  <field name="date"/>
-                  <field name="model_id"/>
-                  <field name="level"/>
-                  <field name="summary"/>
-                  <field name="description"/>
-              </tree>
-          </field>
-      </record>
-      <record model="ir.ui.view" id="view_manage_mq_form">
-          <field name="name">Logging (form)</field>
-          <field name="model">logging</field>
-          <field name="type">form</field>
-          <field name="arch" type="xml">
-              <group name="Logging information">
-                  <group name="col2">
-                      <field name="date"/>
-                      <field name="level"/>
-                  </group>
-                  <group name="col1">
-                      <field name="summary"/>
-                      <field name="description"/>
-                  </group>
+                parent="base.menu_administration"/>
+      
+      <record id="logging_form_view" model="ir.ui.view">
+      <field name="name">Logging</field>
+      <field name="model">logging</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Logging" version="7.0">
+          <header/>
+          <sheet>
+            <group string="Logging information" id="logging" colspan="2">
+              <group id="logging-col1">
+                <field name="summary"/>
+                <field name="description"/>
               </group>
-              <separator string="Details"/>
-              <group name="details1">
-                  <field name="model_id"/>
+            </group>
+            <group string="Details" id="details">
+              <group id="details-col1">
+                <field name="date"/>
+                <field name="level"/>
               </group>
-          </field>
-      </record>
-      <record model="ir.actions.act_window" id="act_logging_view">
-          <field name="name">Logging</field>
-          <field name="res_model">logging</field>
-          <field name="view_type">form</field>
-          <field name="view_mode">tree,form</field>
-          <field name="view_id" ref="logging_tree_view"/>
-      </record>
-      <menuitem parent="menu_logging"
-          id="menu_logging_view"
-          action="act_logging_view" />
+              <group id="details-col2">
+                <field name="model_id"/>
+              </group>
+            </group>
+          </sheet>
+          <footer />
+        </form>
+      </field>
+    </record>
+    <record id="logging_tree_view" model="ir.ui.view">
+      <field name="name">Logging</field>
+      <field name="model">logging</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="Logging" version="7.0"
+              colors="blue:level=='debug';#FF8000:level=='warning';#FF5500:level=='error';red:level=='fatal'">
+          <field name="date"/>
+          <field name="model_id"/>
+          <field name="level"/>
+          <field name="summary"/>
+          <field name="description"/>
+        </tree>
+      </field>
+    </record>
+    <record id="action_logging" model="ir.actions.act_window">
+      <field name="name">Logging</field>
+      <field name="res_model">logging</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem name="Logging" id="menu_logging_details"
+              action="action_logging"
+              parent="menu_logging"/>
+    
   </data>
 </openerp>

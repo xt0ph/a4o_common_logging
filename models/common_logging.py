@@ -2,41 +2,43 @@
 # This file is part of an Adiczion's Module.
 # The COPYRIGHT and LICENSE files at the top level of this repository
 # contains the full copyright notices and license terms.
-from osv import osv, fields
-from tools.translate import _
-import pooler
+from openerp import registry
+from openerp.osv import fields, osv
+from openerp.tools.translate import _
+from openerp.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT
+from datetime import datetime, timedelta
 import logging
 import time
 
 _logger = logging.getLogger(__name__)
+_Step = 5000
 
 
 class CommonLogging(osv.osv):
     _name = "logging"
     _description = "Logging information"
-    _rec_name = "model_id"
-    _order = "date desc"
+    _rec_name = "technical_model_name"
+    _order = "date desc, id desc"
 
     _columns = {
         'model_id': fields.many2one('ir.model', 'Model', required=True,
             help='Select the model.'),
-        'technical_model_name': fields.related('model_id', 'model', type='char',
-            size=64, relation="ir.model", string="Tech. model name",
-            store=False),
-        'date': fields.datetime('Date of Event',
+        'technical_model_name': fields.related('model_id', 'name',
+            string="Tech. model name", readonly=True),
+        'date': fields.datetime('Date of Event', select=True,
             help="Date and time of the event"),
         'level': fields.selection([
-                ('debug', 'Debug'),
-                ('info', 'Info'),
-                ('warning', 'Warning'),
-                ('error', 'Error'),
-                ('fatal', 'Fatal'),
-            ], 'Level', required=True, help="Level of the line"),
-        'summary': fields.char('Summary', size=256),
-        'description': fields.text('Description'),
+            ('debug', 'Debug'),
+            ('info', 'Info'),
+            ('warning', 'Warning'),
+            ('error', 'Error'),
+            ('fatal', 'Fatal')], string='Level', required=True,
+            help="Level of the line"),
+        'summary': fields.char('Summary'),
+        'description': fields.char('Description'),
     }
     _defaults = {
-        'date': lambda *a: time.strftime("%Y-%m-%d %H:%M:%S"),
+        'date': lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
     }
 
     def write_log(self, cr, uid, summary, level='info', date=None,
@@ -51,20 +53,38 @@ class CommonLogging(osv.osv):
                       information is written.
         :return: Nothing
         """
-        context = context or {}
-        Model = self.pool.get('ir.model')
-        new_cr = pooler.get_db(cr.dbname).cursor()
-        data = {
-            'date': date or time.strftime('%Y-%m-%d %H:%M:%S'),
-            'level': level,
-            'summary': summary,
-            'description': description or '',
-        }
-        if model:
-            model_id = Model.search(new_cr, uid, [('model', '=', model)])[0]
-            data.update({'model_id': model_id})
-        result = self.create(new_cr, uid, data, context=context)
-        new_cr.commit()
-        new_cr.close()
-        return result
-CommonLogging()
+        with registry(cr.dbname).cursor() as new_cr:
+            model_id = self.pool.get('ir.model').search(new_cr,
+                uid, [('model', '=', model)])[0]
+            self.create(new_cr, uid, {
+                'date': date or time.strftime('%Y-%m-%d %H:%M:%S'),
+                'level': level,
+                'summary': summary,
+                'description': description or '',
+                'model_id': model_id,
+            }, context=context)
+            new_cr.commit()
+        return True
+    
+    def cleaning_log(self, cr, uid, oldest_than=100, models=None, context=None):
+        """
+        :param oldest_than: Number of days.
+        """
+        domain = []
+        if models:
+            #models = eval(models)
+            if not isinstance(models, list):
+                models = [models]
+            model_ids = self.pool.get('ir.model').search(cr, uid,
+                [('model', 'in', models)], context=context)
+            if model_ids:
+                domain.append(('model_id', 'in', model_ids))
+        dead_line = datetime.now() - timedelta(days=int(oldest_than))
+        dead_line = dead_line. strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+        domain.append(('date', '<', dead_line))
+        while True:
+            ids = self.search(cr, uid, domain, limit=_Step, context=context)
+            if not ids:
+                break
+            self.unlink(cr, uid, ids, context=context)
+        return True

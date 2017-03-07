@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# This file is part of an Adiczion's Module.
+# The COPYRIGHT and LICENSE files at the top level of this repository
+# contains the full copyright notices and license terms.
+-->
+<openerp>
+  <data noupdate="0">
+
+    <!--
+    <record id="group_product_prices_update_menu" model="res.groups">
+      <field name="name">Show menu under product</field>
+      <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+    -->
+
+  </data>
+</openerp>

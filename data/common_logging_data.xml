@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# This file is part of an Adiczion's Module.
+# The COPYRIGHT and LICENSE files at the top level of this repository
+# contains the full copyright notices and license terms.
+-->
+<openerp>
+    <data noupdate="1">
+
+        <record forcecreate="True" id="ir_cron_file_import_action" model="ir.cron">
+            <field name="name">Cleaning Logging</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">0</field>
+            <field eval="False" name="doall"/>
+            <field eval="'logging'" name="model"/>
+            <field eval="'cleaning_log'" name="function"/>
+            <field eval="'('10', ['file.import', 'file.type.config.csv', 'file.type.config.csv.line'], None)'" name="args"/>
+        </record>
+
+    </data>
+</openerp>
