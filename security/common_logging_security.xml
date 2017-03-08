@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# This file is part of an Adiczion's Module.
+# The COPYRIGHT and LICENSE files at the top level of this repository
+# contains the full copyright notices and license terms.
+-->
+<openerp>
+  <data noupdate="0">
+      <record id="group_logging_user" model="res.groups">
+          <field name="name">Logging / User</field>
+      </record>
+      <record id="group_logging_manager" model="res.groups">
+          <field name="name">Logging / Manager</field>
+      </record>
+  </data>
+</openerp>
