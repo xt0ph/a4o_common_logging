@@ -1,22 +1,22 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
 #	* a4o_common_logging
 #
-# Christophe Crier <ccr@adiczion.net>, 2018.
+# Christophe <ccr@adiczion.net>, 2017.
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.saas~3\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-11 06:20+0000\n"
-"PO-Revision-Date: 2018-05-11 08:23+0100\n"
-"Last-Translator: Christophe Crier <ccr@adiczion.net>\n"
+"POT-Creation-Date: 2017-03-21 10:08+0000\n"
+"PO-Revision-Date: 2017-03-21 11:14+0100\n"
+"Last-Translator: Christophe <ccr@adiczion.net>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"Language: fr_FR\n"
-"X-Generator: Lokalize 2.0\n"
+"Language: fr\n"
+"X-Generator: Lokalize 1.5\n"
 
 #. module: a4o_common_logging
 #: field:logging,create_uid:0
@@ -29,34 +29,9 @@ msgid "Created on"
 msgstr "Créé le"
 
 #. module: a4o_common_logging
-#: model:res.groups,comment:a4o_common_logging.group_logging_user
-msgid "Limited Access on Logging."
-msgstr "Accès limité à la journalisation."
-
-#. module: a4o_common_logging
-#: selection:logging,level:0
-msgid "Error"
-msgstr "Erreur"
-
-#. module: a4o_common_logging
-#: field:logging,technical_model_name:0
-msgid "Tech. model name"
-msgstr "Nom tech. du modèle"
-
-#. module: a4o_common_logging
-#: view:logging:0
-msgid "Details"
-msgstr "Details"
-
-#. module: a4o_common_logging
 #: help:logging,date:0
 msgid "Date and time of the event"
 msgstr "Date et heure de l'événement"
-
-#. module: a4o_common_logging
-#: selection:logging,level:0
-msgid "Fatal"
-msgstr "Fatal"
 
 #. module: a4o_common_logging
 #: field:logging,date:0
@@ -64,9 +39,9 @@ msgid "Date of Event"
 msgstr "Date de l'événement "
 
 #. module: a4o_common_logging
-#: help:logging,model_id:0
-msgid "Select the model."
-msgstr "Sélectionnez le modèle."
+#: selection:logging,level:0
+msgid "Debug"
+msgstr "Debug"
 
 #. module: a4o_common_logging
 #: field:logging,description:0
@@ -74,73 +49,24 @@ msgid "Description"
 msgstr "Description"
 
 #. module: a4o_common_logging
-#: model:res.groups,name:a4o_common_logging.group_logging_nobody
-msgid "Nobody"
-msgstr "Personne"
+#: view:logging:a4o_common_logging.logging_form_view
+msgid "Details"
+msgstr "Détails"
 
 #. module: a4o_common_logging
-#: model:res.groups,name:a4o_common_logging.group_logging_user
-msgid "User"
-msgstr "Utilisateur"
-
-#. module: a4o_common_logging
-#: model:ir.module.category,description:a4o_common_logging.module_logging_security_category
-msgid "Logging information (Common to several modules)."
-msgstr "Information de journalisation (Commun a plusieurs modules)."
+#: field:logging,display_name:0
+msgid "Display Name"
+msgstr "Nom affiché"
 
 #. module: a4o_common_logging
 #: selection:logging,level:0
-msgid "Info"
-msgstr "Info"
-
-#. module: a4o_common_logging
-#: model:ir.actions.act_window,name:a4o_common_logging.action_logging
-#: model:ir.ui.menu,name:a4o_common_logging.menu_logging
-#: model:ir.ui.menu,name:a4o_common_logging.menu_logging_details
-#: view:logging:0
-msgid "Logging"
-msgstr "Journalisation"
-
-#. module: a4o_common_logging
-#: field:logging,level:0
-msgid "Level"
-msgstr "Niveau"
-
-#. module: a4o_common_logging
-#: field:logging,summary:0
-msgid "Summary"
-msgstr "Résumé"
-
-#. module: a4o_common_logging
-#: help:logging,level:0
-msgid "Level of the line"
-msgstr "Niveau de la ligne"
+msgid "Error"
+msgstr "Erreur"
 
 #. module: a4o_common_logging
 #: selection:logging,level:0
-msgid "Debug"
-msgstr "Debug"
-
-#. module: a4o_common_logging
-#: field:logging,model_id:0
-msgid "Model"
-msgstr "Modèle"
-
-#. module: a4o_common_logging
-#: model:ir.model,name:a4o_common_logging.model_logging
-#: view:logging:0
-msgid "Logging information"
-msgstr "Informations de journalisation"
-
-#. module: a4o_common_logging
-#: model:res.groups,name:a4o_common_logging.group_logging_manager
-msgid "Manager"
-msgstr "Responsable"
-
-#. module: a4o_common_logging
-#: selection:logging,level:0
-msgid "Warning"
-msgstr "Attention"
+msgid "Fatal"
+msgstr "Fatal"
 
 #. module: a4o_common_logging
 #: model:res.groups,comment:a4o_common_logging.group_logging_manager
@@ -148,13 +74,111 @@ msgid "Full Access on Logging."
 msgstr "Accès complet à la journalisation."
 
 #. module: a4o_common_logging
+#: field:logging,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: a4o_common_logging
+#: selection:logging,level:0
+msgid "Info"
+msgstr "Info"
+
+#. module: a4o_common_logging
+#: field:logging,__last_update:0
+msgid "Last Modified on"
+msgstr "Modifié le"
+
+#. module: a4o_common_logging
+#: field:logging,write_uid:0
+msgid "Last Updated by"
+msgstr "Modifié par"
+
+#. module: a4o_common_logging
+#: field:logging,write_date:0
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: a4o_common_logging
+#: field:logging,level:0
+msgid "Level"
+msgstr "Niveau"
+
+#. module: a4o_common_logging
+#: help:logging,level:0
+msgid "Level of the line"
+msgstr "Niveau de la ligne"
+
+#. module: a4o_common_logging
+#: model:res.groups,comment:a4o_common_logging.group_logging_user
+msgid "Limited Access on Logging."
+msgstr "Accès limité à la journalisation."
+
+#. module: a4o_common_logging
+#: model:ir.actions.act_window,name:a4o_common_logging.action_logging
+#: model:ir.ui.menu,name:a4o_common_logging.menu_logging
+#: model:ir.ui.menu,name:a4o_common_logging.menu_logging_details
+#: view:logging:a4o_common_logging.logging_form_view
+msgid "Logging"
+msgstr "Journalisation"
+
+#. module: a4o_common_logging
 #: model:ir.module.category,name:a4o_common_logging.module_logging_security_category
 msgid "Logging (common)"
 msgstr "Journalisation (commun)"
 
 #. module: a4o_common_logging
+#: model:ir.model,name:a4o_common_logging.model_logging
+msgid "Logging information"
+msgstr "Informations de journalisation"
+
+#. module: a4o_common_logging
+#: model:ir.module.category,description:a4o_common_logging.module_logging_security_category
+msgid "Logging information (Common to several modules)."
+msgstr "Information de journalisation (Commun a plusieurs modules)."
+
+#. module: a4o_common_logging
+#: model:res.groups,name:a4o_common_logging.group_logging_manager
+msgid "Manager"
+msgstr "Responsable"
+
+#. module: a4o_common_logging
+#: field:logging,model_id:0
+msgid "Model"
+msgstr "Modèle"
+
+#. module: a4o_common_logging
+#: model:res.groups,name:a4o_common_logging.group_logging_nobody
+msgid "Nobody"
+msgstr "Personne"
+
+#. module: a4o_common_logging
 #: model:res.groups,comment:a4o_common_logging.group_logging_nobody
 msgid "Not Intended to use Logging"
-msgstr "Non destiné à accéder à la journalisation"
+msgstr "Pas prévu d'accéder à la journalisation"
+
+#. module: a4o_common_logging
+#: help:logging,model_id:0
+msgid "Select the model."
+msgstr "Sélectionnez le modèle."
+
+#. module: a4o_common_logging
+#: field:logging,summary:0
+msgid "Summary"
+msgstr "Résumé"
+
+#. module: a4o_common_logging
+#: field:logging,technical_model_name:0
+msgid "Tech. model name"
+msgstr "Nom tech. du modèle"
+
+#. module: a4o_common_logging
+#: model:res.groups,name:a4o_common_logging.group_logging_user
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: a4o_common_logging
+#: selection:logging,level:0
+msgid "Warning"
+msgstr "Attention"
 
 

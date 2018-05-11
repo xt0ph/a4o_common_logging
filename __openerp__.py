@@ -4,7 +4,7 @@
 # contains the full copyright notices and license terms.
 {
     'name': 'Common Logging',
-    'version': '7.0.0.4',
+    'version': '8.0.0.5',
     'author': 'Adiczion SARL',
     'license': 'AGPL-3',
     'category': 'Extra',
