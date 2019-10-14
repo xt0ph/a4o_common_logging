@@ -2,7 +2,10 @@
 # This file is part of an Adiczion's Module.
 # The COPYRIGHT and LICENSE files at the top level of this repository
 # contains the full copyright notices and license terms.
-from openerp import models, fields, api, registry, _
+from odoo import models, fields, api, registry, _
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 import logging
 import time
 
@@ -31,13 +34,43 @@ class CommonLogging(models.Model):
             ('fatal', 'Fatal'),
         ], string='Level', required=True, help="Level of the line")
     summary = fields.Char(string='Summary')
-    description = fields.Char(string='Description')
-    
+    description = fields.Text(string='Description')
+
     @api.multi
-    def write_log(self, summary, level='info', date=None, description=None,
-                  model=None):
+    def log_fatal(self, summary, date=None, description=None, model=None):
+        self.write_log(
+            summary, level='fatal', date=date, description=description,
+            model=model)
+
+    @api.multi
+    def log_error(self, summary, date=None, description=None, model=None):
+        self.write_log(
+            summary, level='error', date=date, description=description,
+            model=model)
+
+    @api.multi
+    def log_warning(self, summary, date=None, description=None, model=None):
+        self.write_log(
+            summary, level='warning', date=date, description=description,
+            model=model)
+
+    @api.multi
+    def log_info(self, summary, date=None, description=None, model=None):
+        self.write_log(summary, date=date, description=description, model=model)
+
+    @api.multi
+    def log_debug(self, summary, date=None, description=None, model=None):
+        self.write_log(
+            summary, level='debug', date=date, description=description,
+            model=model)
+
+    @api.multi
+    def write_log(
+            self, summary, level='info', date=None, description=None,
+            model=None):
         """
         Uses a new cursor to write a log information
+
         :param summary:
         :param level:
         :param date:
@@ -59,3 +92,30 @@ class CommonLogging(models.Model):
                     'model_id': model and new_env.env['ir.model'].search(
                         [('model', '=', model)]).id,
                 })
+                new_env._cr.commit()
+
+    @api.multi
+    def cleaning_logs(self, retention=120):
+        """
+        Delete logs outside the retention period (default retention period
+        120 days)
+
+        :param retention: Retention period in days.
+        """
+        limit = 5000
+        oldest = datetime.now() + relativedelta(days=dlay)
+        _logger.info("Delete log oldest than '{}'.".format(
+            datetime.strftime(oldest, DEFAULT_SERVER_DATE_FORMAT)))
+        while True:
+            ids = self.search(
+                [('create_date', '<',
+                    oldest.strftime(DEFAULT_SERVER_DATE_FORMAT))],
+                limit=limit)
+            if not ids:
+                break
+            _logger.info("Number of records to delete {}.".format(len(ids)))
+            # Delete the ids, commit and log this action.
+            ids.unlink()
+            self._cr.commit()
+            self.write_log("Number of log records deleted: {}".format(len(ids)))
+        return True

@@ -4,7 +4,7 @@ Installing Adiczion module
 Prerequisites
 -------------
 
- * Python 2.7 or later (http://www.python.org/)
+ * Python 3.5 or later (http://www.python.org/)
  * odoo (http://odoo.com/)
 
 Installation

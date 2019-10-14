@@ -4,27 +4,30 @@
 # contains the full copyright notices and license terms.
 {
     'name': 'Common Logging',
-    'version': '8.0.0.5',
+    'version': '12.0.0.6',
     'author': 'Adiczion SARL',
     'license': 'AGPL-3',
     'category': 'Extra',
     'depends': [
-        'base'],
+        'base',
+        'mail',
+        ],
     'demo': [],
     'website': 'http://adiczion.com',
     'description': """
 Logging
 =======
 
-This module does nothing of its own. It provides other modules with a 
+This module does nothing by itself. It provides to the other modules a
 centralization environment for logging.
 
-The list of logged events can be accessed via the menu 
+The list of logged events can be accessed via the menu
 'Configuration -> Logging'
     """,
     'data': [
         'security/common_logging_security.xml',
         'security/ir.model.access.csv',
+        'data/common_logging_data.xml',
         'views/common_logging_view.xml',
     ],
     'test': [],

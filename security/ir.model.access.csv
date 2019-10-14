@@ -1,4 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_logging_nobody,access_logging_nobody,model_logging,group_logging_nobody,1,0,0,0
-access_logging_user,access_logging_user,model_logging,group_logging_user,1,1,1,0
+access_logging_user,access_logging_user,model_logging,group_logging_user,1,0,0,0
 access_logging_manager,access_logging_manager,model_logging,group_logging_manager,1,1,1,1
